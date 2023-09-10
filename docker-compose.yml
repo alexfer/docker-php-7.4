@@ -22,7 +22,7 @@ services:
         build:
           context: ./config/php
           dockerfile: Dockerfile
-        container_name: php
+        container_name: php:7.4
         volumes:
           - ./dev:/var/www
           - ./config/php/php.ini:/usr/local/etc/php/php.ini
