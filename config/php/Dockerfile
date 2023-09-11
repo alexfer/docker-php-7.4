@@ -13,13 +13,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libmcrypt-dev \
         libpng-dev \
 		libzip-dev \
-#        openssh-client \
-    && docker-php-ext-install -j$(nproc) iconv mysqli pdo_mysql zip \
+        libicu-dev \
+    && docker-php-ext-install -j$(nproc) iconv intl mysqli pdo_mysql zip \
     && docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd
-
-#CMD ssh-keygen -q -t rsa -N '' -f /keys/id_rsa
-    
+    && docker-php-ext-install -j$(nproc) gd \
+   
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | sudo -E bash
 RUN apt-get install symfony-cli
